@@ -67,18 +67,22 @@ namespace Azur.Web.UI.Controllers
         }
 
         // GET: User/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int p_iUserId, int p_iVersion)
         {
-            return View();
+            DataAccess oDataAccess = new DataAccess();
+
+            return View(oDataAccess.Get().Find(Models => Models.UserId == p_iUserId
+                && Models.Version == p_iVersion));
         }
 
         // POST: User/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int p_iUserId, int p_iVersion, UserModel p_oUserModel)
         {
             try
             {
-                // TODO: Add update logic here
+                DataAccess oDataAccess = new DataAccess();
+                oDataAccess.Update(p_oUserModel);
 
                 return RedirectToAction("Index");
             }

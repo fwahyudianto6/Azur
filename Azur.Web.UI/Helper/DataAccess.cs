@@ -116,5 +116,46 @@ namespace Azur.Web.UI.Helper
                 throw oException;
             }
         }
+
+        /// <summary>
+        /// Update User
+        /// </summary>
+        /// <param name="p_oUserModel"></param>
+        /// <returns></returns>
+        public bool Update(UserModel p_oUserModel)
+        {
+            try
+            {
+                Connection();
+                SqlCommand oSqlCommand = new SqlCommand("uspUserUpdate", oSqlConnection);
+                oSqlCommand.CommandType = CommandType.StoredProcedure;
+
+                oSqlCommand.Parameters.AddWithValue("@p_iUserId", p_oUserModel.UserId);
+                oSqlCommand.Parameters.AddWithValue("@p_strFullName", p_oUserModel.FullName);
+                oSqlCommand.Parameters.AddWithValue("@p_strTitle", p_oUserModel.Title);
+                oSqlCommand.Parameters.AddWithValue("@p_strUserName", p_oUserModel.Username);
+                oSqlCommand.Parameters.AddWithValue("@p_strPassword", p_oUserModel.Password);
+                oSqlCommand.Parameters.AddWithValue("@p_strEmail", p_oUserModel.Email);
+                oSqlCommand.Parameters.AddWithValue("@p_bIsActive", p_oUserModel.IsActive);
+                oSqlCommand.Parameters.AddWithValue("@p_iVersion", p_oUserModel.Version);
+                oSqlCommand.Parameters.AddWithValue("@p_dtCreateDate", DateTime.Now);
+                oSqlCommand.Parameters.AddWithValue("@p_iCreateByUserId", 0);
+                oSqlCommand.Parameters.AddWithValue("@p_dtUpdateDate", DateTime.Now);
+                oSqlCommand.Parameters.AddWithValue("@p_iUpdateByUserId", 0);
+
+                oSqlConnection.Open();
+                int i = oSqlCommand.ExecuteNonQuery();
+                oSqlConnection.Close();
+
+                if (i >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception oException)
+            {
+                throw oException;
+            }
+        }
     }
 }
