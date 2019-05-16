@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.SqlClient;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Data.SqlClient;
-using System.Data;
-using System.Data;
 
 #region Trademark
 
@@ -131,6 +120,6 @@ namespace Azur.Web.UI.Models
             set { m_iUpdateByUserId = value; }
         }
 
-        #endregion // end of Property     
+        #endregion // end of Property        
     }
 }

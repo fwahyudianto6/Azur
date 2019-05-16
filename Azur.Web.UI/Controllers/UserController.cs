@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Azur.Web.UI.Helper;
 
 #region Trademark
 
@@ -24,7 +21,10 @@ namespace Azur.Web.UI.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View();
+            DataAccess oDataAccess = new DataAccess();
+
+            ModelState.Clear();
+            return View(oDataAccess.Get());
         }
 
         // GET: User/Details/5
