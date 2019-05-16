@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Azur.Web.UI.Helper;
+using Azur.Web.UI.Models;
 
 #region Trademark
 
@@ -41,16 +42,26 @@ namespace Azur.Web.UI.Controllers
 
         // POST: User/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(UserModel p_oUserModel)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    DataAccess oDataAccess = new DataAccess();
+
+                    if (oDataAccess.Add(p_oUserModel))
+                    {
+                        ModelState.Clear();
+                        ViewBag.Message = "User Added Successfully!";
+                    }
+                }
 
                 return RedirectToAction("Index");
             }
             catch
             {
+                ViewBag.Message = "User Added Aborted!";
                 return View();
             }
         }

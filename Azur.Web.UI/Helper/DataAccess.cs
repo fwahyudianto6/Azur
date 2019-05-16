@@ -43,9 +43,9 @@ namespace Azur.Web.UI.Helper
             Connection();
             List<UserModel> lsData = new List<UserModel>();
 
-            SqlCommand cmd = new SqlCommand("uspUserGet", oSqlConnection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter oSqlDataAdapter = new SqlDataAdapter(cmd);
+            SqlCommand oSqlCommand = new SqlCommand("uspUserGet", oSqlConnection);
+            oSqlCommand.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter oSqlDataAdapter = new SqlDataAdapter(oSqlCommand);
             DataTable dt = new DataTable();
 
             oSqlConnection.Open();
@@ -74,6 +74,47 @@ namespace Azur.Web.UI.Helper
             }
 
             return lsData;
+        }
+
+        /// <summary>
+        /// Add User
+        /// </summary>
+        /// <param name="p_oUserModel"></param>
+        /// <returns></returns>
+        public bool Add(UserModel p_oUserModel)
+        {
+            try
+            {
+                Connection();
+                SqlCommand oSqlCommand = new SqlCommand("uspUserAdd", oSqlConnection);
+                oSqlCommand.CommandType = CommandType.StoredProcedure;
+
+                oSqlCommand.Parameters.AddWithValue("@p_strFullName", p_oUserModel.FullName);
+                oSqlCommand.Parameters.AddWithValue("@p_strTitle", p_oUserModel.Title);
+                oSqlCommand.Parameters.AddWithValue("@p_strUserName", p_oUserModel.Username);
+                oSqlCommand.Parameters.AddWithValue("@p_strPassword", p_oUserModel.Password);
+                oSqlCommand.Parameters.AddWithValue("@p_strEmail", p_oUserModel.Email);
+                oSqlCommand.Parameters.AddWithValue("@p_bIsActive", p_oUserModel.IsActive);
+                oSqlCommand.Parameters.AddWithValue("@p_bIsDeleted", 0);
+                oSqlCommand.Parameters.AddWithValue("@p_iVersion", 1);
+                oSqlCommand.Parameters.AddWithValue("@p_dtCreateDate", DateTime.Now);
+                oSqlCommand.Parameters.AddWithValue("@p_iCreateByUserId", 0);
+                oSqlCommand.Parameters.AddWithValue("@p_dtUpdateDate", DateTime.Now);
+                oSqlCommand.Parameters.AddWithValue("@p_iUpdateByUserId", 0);
+
+                oSqlConnection.Open();
+                int i = oSqlCommand.ExecuteNonQuery();
+                oSqlConnection.Close();
+
+                if (i >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception oException)
+            {
+                throw oException;
+            }
         }
     }
 }
