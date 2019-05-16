@@ -1,6 +1,6 @@
-﻿using System.Web.Mvc;
-using Azur.Web.UI.Helper;
+﻿using Azur.Web.UI.Helper;
 using Azur.Web.UI.Models;
+using System.Web.Mvc;
 
 #region Trademark
 
@@ -93,18 +93,25 @@ namespace Azur.Web.UI.Controllers
         }
 
         // GET: User/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int p_iUserId)
         {
-            return View();
+            DataAccess oDataAccess = new DataAccess();
+
+            return View(oDataAccess.Get().Find(Models => Models.UserId == p_iUserId));
         }
 
         // POST: User/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int p_iUserId, UserModel p_oUserModel)
         {
             try
             {
-                // TODO: Add delete logic here
+                DataAccess oDataAccess = new DataAccess();
+
+                if (oDataAccess.Delete(p_oUserModel))
+                {
+                    ViewBag.AlertMsg = "User Deleted Successfully!";
+                }
 
                 return RedirectToAction("Index");
             }

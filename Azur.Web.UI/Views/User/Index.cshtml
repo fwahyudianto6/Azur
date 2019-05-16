@@ -43,7 +43,7 @@
         <tr>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { p_iUserId = item.UserId, p_iVersion = item.Version }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserId }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                @Html.ActionLink("Delete", "Delete", new { p_iUserId = item.UserId })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FullName)

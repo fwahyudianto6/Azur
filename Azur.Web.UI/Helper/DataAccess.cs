@@ -157,5 +157,38 @@ namespace Azur.Web.UI.Helper
                 throw oException;
             }
         }
+
+        /// <summary>
+        /// Delete User
+        /// </summary>
+        /// <param name="p_oUserModel"></param>
+        /// <returns></returns>
+        public bool Delete(UserModel p_oUserModel)
+        {
+            try
+            {
+                Connection();
+                SqlCommand oSqlCommand = new SqlCommand("uspUserDelete", oSqlConnection);
+                oSqlCommand.CommandType = CommandType.StoredProcedure;
+
+                oSqlCommand.Parameters.AddWithValue("@p_iUserId", p_oUserModel.UserId);
+                oSqlCommand.Parameters.AddWithValue("@p_bIsDeleted", 1);
+                oSqlCommand.Parameters.AddWithValue("@p_dtUpdateDate", DateTime.Now);
+                oSqlCommand.Parameters.AddWithValue("@p_iUpdateByUserId", 0);
+
+                oSqlConnection.Open();
+                int i = oSqlCommand.ExecuteNonQuery();
+                oSqlConnection.Close();
+
+                if (i >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception oException)
+            {
+                throw oException;
+            }
+        }
     }
 }
