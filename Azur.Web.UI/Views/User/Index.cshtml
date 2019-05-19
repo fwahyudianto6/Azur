@@ -4,6 +4,7 @@
     ViewBag.Title = "User List";
 }
 
+<h2>@ViewBag.Title</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -26,9 +27,6 @@
         </th>
         <th>
             @Html.DisplayName("Is Active")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Version)
         </th>
         <th>
             @Html.DisplayName("Update Date")
@@ -59,9 +57,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Version)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdateDate)
