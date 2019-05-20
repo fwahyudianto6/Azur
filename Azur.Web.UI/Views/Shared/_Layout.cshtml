@@ -2,8 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Fajar Wahyudianto, Kalpawreska Teknologi Indonesia" />
+    <meta name="Description" content="Microsoft Azure Storage is a set of services that allows you to store large volumes of data in a cost-effective manner and in a way that makes the data readily and reliably available to services and applications that consume it.">
+    <meta name="keywords" content="Microsoft Azure, Azure, Storage, Cognitive Services">
+
     <title>@ViewBag.Title - Azur Application</title>
+    <link rel="shortcut icon" href="~/favicon.ico" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -22,6 +29,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("User List", "Index", "User")</li>
+                    <li>@Html.ActionLink("Azure Storage", "Index", "Storage")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
@@ -33,12 +41,13 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Azur Application</p>
+            <p>&copy; @DateTime.Now.Year - Azur Application. Version : @typeof(Azur.Web.UI.MvcApplication).Assembly.GetName().Version</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/lightbox")
     @RenderSection("scripts", required: false)
 </body>
 </html>

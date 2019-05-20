@@ -21,9 +21,15 @@ namespace Azur.Web.UI
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            //  Add Lightbox Style
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/lightbox.css"));
+
+            //  Add Lightbox Style
+            bundles.Add(new ScriptBundle("~/bundles/lightbox").Include(
+                "~/Scripts/lightbox.js"));
         }
     }
 }
