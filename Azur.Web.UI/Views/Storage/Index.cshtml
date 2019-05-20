@@ -15,6 +15,17 @@
             }
         </div>
         <div class="col-sm-4 pull-right">
+            @using (Html.BeginForm("Search", "Storage", FormMethod.Post, new { enctype = "multipart/form-data", @class = "navbar-form" }))
+            {
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search photos" name="term" value="@ViewBag.Search" style="max-width: 800px">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            }
         </div>
     </div>
 
