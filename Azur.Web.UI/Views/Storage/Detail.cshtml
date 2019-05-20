@@ -1,0 +1,29 @@
+﻿@using Azur.Web.UI.Models
+
+@{
+    ViewBag.Title = "Detail Photos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container" style="padding-top: 24px">
+    <div class="row">
+        <div class="col-sm-12">
+            @foreach (StorageModel oStorage in ViewBag.Blobs)
+            {
+                <div class="col-sm-6" style="padding-bottom:30px">
+                    <a href="@oStorage.ImageUri" rel="lightbox" title="@oStorage.Caption">
+                        <img src="@oStorage.ImageUri" width="100%" height="100%" title="@oStorage.Caption" style="padding-right: 16px; padding-bottom: 16px" />
+                    </a>
+                </div>
+                <div class="col-sm-6" style="padding-bottom:30px">
+                    <textarea class="form-control" style="max-width:90%; height:350px; resize:none">
+                        @oStorage.Response 
+                    </textarea>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script async src="//jsfiddle.net/psasik/5f9xkywg/embed/"></script>

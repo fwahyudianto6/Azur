@@ -190,5 +190,74 @@ namespace Azur.Web.UI.Helper
                 throw oException;
             }
         }
+
+        /// <summary>
+        /// Get Data User
+        /// </summary>
+        /// <returns></returns>
+        public List<StorageModel> GetStorage()
+        {
+            Connection();
+            List<StorageModel> lsData = new List<StorageModel>();
+
+            SqlCommand oSqlCommand = new SqlCommand("uspStorageGet", oSqlConnection);
+            oSqlCommand.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter oSqlDataAdapter = new SqlDataAdapter(oSqlCommand);
+            DataTable dt = new DataTable();
+
+            oSqlConnection.Open();
+            oSqlDataAdapter.Fill(dt);
+            oSqlConnection.Close();
+
+            foreach (DataRow oDataRow in dt.Rows)
+            {
+                lsData.Add(
+                    new StorageModel
+                    {
+                        StorageId = Convert.ToInt32(oDataRow["KTI_STORAGE_ID"]),
+                        ImageName = Convert.ToString(oDataRow["IMAGE_NAME"]),
+                        Caption = Convert.ToString(oDataRow["CAPTION"]),
+                        ImageUri = Convert.ToString(oDataRow["IMAGE_URI"]),
+                        ThumbnailUri = Convert.ToString(oDataRow["THUMBNAIL_URI"]),
+                        Response = Convert.ToString(oDataRow["RESPONSE"])
+                    });
+            }
+
+            return lsData;
+        }
+
+        /// <summary>
+        /// Add Storage
+        /// </summary>
+        /// <param name="p_oStorageModel"></param>
+        /// <returns></returns>
+        public bool AddStorage(StorageModel p_oStorageModel)
+        {
+            try
+            {
+                Connection();
+                SqlCommand oSqlCommand = new SqlCommand("uspStorageAdd", oSqlConnection);
+                oSqlCommand.CommandType = CommandType.StoredProcedure;
+
+                oSqlCommand.Parameters.AddWithValue("@p_strImageName", p_oStorageModel.ImageName);
+                oSqlCommand.Parameters.AddWithValue("@p_strCaption", p_oStorageModel.Caption);
+                oSqlCommand.Parameters.AddWithValue("@p_strImageUri", p_oStorageModel.ImageUri);
+                oSqlCommand.Parameters.AddWithValue("@p_strThumbnailUri", p_oStorageModel.ThumbnailUri);
+                oSqlCommand.Parameters.AddWithValue("@p_strResponse", p_oStorageModel.Response);
+
+                oSqlConnection.Open();
+                int i = oSqlCommand.ExecuteNonQuery();
+                oSqlConnection.Close();
+
+                if (i >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception oException)
+            {
+                throw oException;
+            }
+        }
     }
 }

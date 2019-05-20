@@ -30,8 +30,8 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.3.0.0")]
-[assembly: AssemblyFileVersion("1.3.0.0")]
+[assembly: AssemblyVersion("1.3.1.0")]
+[assembly: AssemblyFileVersion("1.3.1.0")]
 
 /*
  *  1.0.0.0     :   Initial Project
@@ -44,5 +44,6 @@ using System.Runtime.InteropServices;
  *  1.2.0.0     :   Add Azure Storage Module
  *  1.2.1.0     :   Change Framework to 4.6 For Azure Cognitive Services
  *  1.3.0.0     :   Add Azure Cognitive Services Module
+ *  1.3.1.0     :   Add JSON Response
  *  
  */
